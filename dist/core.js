@@ -37,13 +37,14 @@ const O=function(){const e=document.createElement("link").relList;if(e&&e.suppor
                 <svg id="locked" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                 </svg>
-                <p id="msg" class="text-sm xs:text-base">Enter the meeting password</p>
+                <p id="msg" class="text-sm xs:text-base">This page is password protected.</p>
             </header>
             <form class="hidden">
                 <input type="password" id="pwd" name="pwd" aria-label="Password" autofocus class="font-extralight flex w-full py-2 px-4 tracking-wider rounded-sm focus:outline-none border border-gray-700 bg-gray-800" />
                 <input type="submit" value="Submit" class="text-black w-full py-2 mt-4 cursor-pointer bg-white rounded-sm">
             </form>
         </div>
+        <a href="https://github.com/Greenheart/pagecrypt" class="fixed bottom-0 right-0 p-4 text-sm xs:text-base">Created with <span class="font-semibold">PageCrypt</span></a>
     </main>
     <!--ENCRYPTED PAYLOAD-->
 </body>
