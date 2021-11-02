@@ -25,6 +25,7 @@ const start = async () => {
     ciphertext = bytes.slice(32 + 16)
 
     if (localStorage.passphrase) {
+        console.log("PASSPHRASE FOUN");
         pwd.value = localStorage.passphrase;
     }
 
@@ -46,8 +47,9 @@ const start = async () => {
     }
     */
 
-    if (sessionStorage.k || pwd.value) {
-        await decrypt()
+    // if (sessionStorage.k || pwd.value) {
+    if (pwd.value) {
+            await decrypt()
     } else {
         hide(load)
         show(form)
@@ -156,9 +158,10 @@ async function decryptFile(
 ) {
     const decoder = new TextDecoder()
 
-    const key = sessionStorage.k
-        ? await importKey(JSON.parse(sessionStorage.k))
-        : await deriveKey(salt, password)
+    // const key = sessionStorage.k
+    //     ? await importKey(JSON.parse(sessionStorage.k))
+    //     : await deriveKey(salt, password)
+    const key = await deriveKey(salt, password)
 
     const data = new Uint8Array(
         await subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext),
@@ -166,7 +169,7 @@ async function decryptFile(
     if (!data) throw 'Malformed data'
 
     // If no exception were thrown, decryption succeded and we can save the key.
-    sessionStorage.k = JSON.stringify(await subtle.exportKey('jwk', key))
+    // sessionStorage.k = JSON.stringify(await subtle.exportKey('jwk', key))
 
     return decoder.decode(data)
 }
