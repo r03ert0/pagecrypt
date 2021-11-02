@@ -28,7 +28,11 @@ const preparePayloadTag = (html) =>
 
 const deleteViteModuleScript = (html) => {
     const match = html.match(/(<script type="module">[\s\S]*)var [\s\S]*;(\!function\(\)\{[\s\S]*\}\(\);)/)
-    return html.replace(match[1], '  <script type="module">').replace(match[2], '')
+    if (match) {
+        return html.replace(match[1], '  <script type="module">').replace(match[2], '')
+    } else {
+        return html;
+    }
 }
 
 const deleteStyleAssetComment = (html) =>
