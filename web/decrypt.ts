@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     iv = bytes.slice(32, 32 + 16)
     ciphertext = bytes.slice(32 + 16)
 
+    if (localStorage.passphrase) {
+        pwd.value = localStorage.passphrase;
+    }
 
     /**
      * Allow passwords to be automatically provided via the URI Fragment.
@@ -84,7 +87,9 @@ async function sleep(milliseconds: number): Promise<void> {
 }
 
 async function decrypt() {
-    load.lastElementChild.innerText = 'Decrypting...'
+    localStorage.passphrase = pwd.value
+
+    load.lastElementChild.innerText = 'Loading...'
     hide(header)
     hide(form)
     show(load)
