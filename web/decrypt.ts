@@ -11,7 +11,7 @@ const [pwd, header, msg, form, load] = [
 
 let salt: Uint8Array, iv: Uint8Array, ciphertext: Uint8Array
 
-document.addEventListener('DOMContentLoaded', async () => {
+const start = async () => {
     const pl = find('pre').innerText
     if (!pl) {
         pwd.disabled = true
@@ -37,12 +37,14 @@ document.addEventListener('DOMContentLoaded', async () => {
      * NOTE: However, beware that the password remains as a history entry if you use magic links!
      * Feel free to submit a PR if you know a workaround for this.
      */
+    /*
     if (location.hash) {
         const url = new URL(window.location.href)
         pwd.value = url.hash.slice(1)
         url.hash = ''
         history.replaceState(null, '', url.toString())
     }
+    */
 
     if (sessionStorage.k || pwd.value) {
         await decrypt()
@@ -52,7 +54,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         header.classList.replace('hidden', 'flex')
         pwd.focus()
     }
-})
+
+};
 
 const subtle =
     window.crypto?.subtle ||
@@ -167,3 +170,6 @@ async function decryptFile(
 
     return decoder.decode(data)
 }
+
+// document.addEventListener('DOMContentLoaded', start);
+start();
