@@ -4,7 +4,6 @@ build
 test/package-lock.json
 test/node_modules
 test/out*
-dist
 test/index.html
 
 # npm pack test output
